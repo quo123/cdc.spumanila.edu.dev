@@ -1,0 +1,44 @@
+Options +FollowSymLinks
+Options -Indexes
+AddCharset UTF-8 .html
+AddCharset UTF-8 .php
+php_value post_max_size 30M
+php_value upload_max_filesize 5M
+#php_value SMTP smtp.gmail.com
+#php_value smtp_port 465
+
+#Rewriting URLs
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,QSA,NC,L]
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://cdc.spumanila.edu.dev/.*$ [NC]
+RewriteRule \.(gif|jpe?g|png|pdf|docx?|xlsx?|pps?t?x?|js|css)$ - [F,NC,L]
+
+#RewriteCond %{HTTP_HOST} ^www.spumanila.edu.ph$ [NC]
+#RewriteRule ^(.*)$ http://spumanila.edu.ph/$1 [R=301,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteRule ^www.spumanila.edu.ph/(.*)$ spumanila.edu.ph/$1 [NC,L,B]
+
+#RewriteRule ^news/([a-zA-Z]+)/([0-9-]+)/([\S]+)/$ news.php?cat=$1&d=$2&title=$3 [NC,L,B]
+#RewriteRule ^news/([a-zA-Z]+)/p-([0-9]{1,4})/$ news.php?cat=$1&page=$2 [NC,L,B]
+#RewriteRule ^news/([a-zA-Z]+)/$ news.php?cat=$1 [NC,L,B]
+
+#RewriteRule ^post/([a-zA-Z]+)/$ post.php?cat=$1 [NC,L,B]
+
+#RewriteRule ^u/([a-zA-Z]+)/([a-zA-Z]+)/$ u.php?action=$1&to=$2 [NC,L,B]
+#RewriteRule ^u/([a-zA-Z]+)/$ u.php?action=$1 [NC,L,B]
+
+#RewriteRule ^boards/([a-zA-Z]+)/thread/([0-9]+)/$ boards.php?board=$1&thread=$2 [NC,L,B]
+#RewriteRule ^boards/([a-zA-Z]+)/([0-9]+)/$ boards.php?board=$1&page=$2 [NC,L,B]
+#RewriteRule ^boards/([a-zA-Z]+)/$ boards.php?board=$1 [NC,L,B]
+
+#RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/$ $1_$2.php [NC,L,B]
+RewriteRule ^([a-zA-Z]+)/$ $1.php [NC,L,B]
+
+#ErrorDocument 404 http://cdc.spumanila.edu.dev/
