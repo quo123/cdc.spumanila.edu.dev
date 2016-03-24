@@ -1,18 +1,19 @@
 <?php
 require_once 'classDB.php';
+require_once 'constants.php';
 
 function init_my_cookie() {
-	setcookie('__clog', session_id(), time()+60*60, '/');
+	setcookie(COOKIE_NAME, session_id(), time()+60*60, '/');
 }
 
 function kill_my_cookie() {
-	setcookie('__clog', session_id(), time()-3600, '/');
+	setcookie(COOKIE_NAME, session_id(), time()-3600, '/');
 }
 
 function init_session() {
 	if (ini_set('session.use_cookies', '0') && ini_set('session.use_only_cookies', '0')) {
-		if (isset($_COOKIE['__clog'])) {
-			session_id($_COOKIE['__clog']);
+		if (isset($_COOKIE[COOKIE_NAME])) {
+			session_id($_COOKIE[COOKIE_NAME]);
 			session_start();
 			return true;
 		} else {
@@ -31,7 +32,7 @@ function extend_timeout() {
 
 //refresh flags and reach
 function refresh_session() {
-	$db = new DBObject('cdc');
+	$db = new DBObject(CURRENT_DB);
 	$sql = "SELECT * FROM userinfo WHERE userid = {$_SESSION['userid']}";
 	
 	if (($result = $db->query($sql)) && (mysqli_num_rows($result) > 0)) {
@@ -51,7 +52,7 @@ function refresh_session() {
 }
 
 function getSettings() {
-	$db = new DBObject('cdc');
+	$db = new DBObject(CURRENT_DB);
 	$sql = "SELECT schoolyear, semester FROM settings LIMIT 1";
 	if ($res = $db->query($sql)) {
 		$settings = mysqli_fetch_assoc($res);
@@ -66,7 +67,7 @@ function getSettings() {
  * @param string $to - set page to jump to after login
  */
 function set_need_login($to = '/') {
-	if (!isset($_COOKIE['__clog'])) {
+	if (!isset($_COOKIE[COOKIE_NAME])) {
 		//redirect to "must log in" page
 		header("location: $to");
 		return false;

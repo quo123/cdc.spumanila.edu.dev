@@ -10,7 +10,7 @@ extend_timeout();
 
 //print_r($_POST);
 
-$db  =  new DBObject('cdc');
+$db  =  new DBObject(CURRENT_DB);
 
 //$studno = $db->escape($_POST['studno']);
 $lname = $db->escape(trim($_POST['lname']));

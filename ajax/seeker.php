@@ -8,7 +8,7 @@ init_my_cookie();
 refresh_session() or die('Error: Could not connect to server. Please log in again if the error persists.');
 extend_timeout();
 
-$db = new DBObject('cdc');
+$db = new DBObject(CURRENT_DB);
 $settings = getSettings();
 $year = intval($settings['year']);
 $sem = intval($settings['sem']);
@@ -36,7 +36,7 @@ if (isset($_GET['term'])) {
 	
 	if ($sid === 'ALL') {
 		echo "<legend>All students</legend>\n";
-		$sql = "SELECT $fields FROM students $orderby";
+		$sql = "SELECT $fields FROM students $orderby LIMIT 50";
 	} else if ($sid === 'RECENT') {
 		echo "<legend>Recently added students</legend>\n";
 		$sql = "SELECT $fields FROM students $orderby LIMIT 20";

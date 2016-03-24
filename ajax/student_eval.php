@@ -3,7 +3,7 @@ chdir('..');
 date_default_timezone_set('Asia/Manila');
 require_once 'includes/functions.php';
 
-$db = new DBObject('cdc');
+$db = new DBObject(CURRENT_DB);
 
 if (isset($_POST['evalcode'])) {
 	if (strtoupper($_POST['evalcode']) === 'OK') {

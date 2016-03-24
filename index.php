@@ -14,8 +14,8 @@ $cooking = init_session();
 	<script src="script/jquery-1.11.1.min.js"></script>
 	<script src="script/jquery-ui.min.js"></script>
 	<script src="script/jquery.tablesorter.min.js"></script>
-	<!--<script src="script/prescript.js"></script>-->
-	<script src="script/prescript.min.js"></script>
+	<script src="script/prescript.js"></script>
+	<!--<script src="script/prescript.min.js"></script>-->
 </head>
 
 <body class="cdc">

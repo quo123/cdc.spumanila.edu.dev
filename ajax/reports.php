@@ -8,7 +8,7 @@ init_my_cookie();
 refresh_session() or die('Error: Could not connect to server. Please log in again if the error persists.');
 extend_timeout();
 
-$db = new DBObject('cdc');
+$db = new DBObject(CURRENT_DB);
 $settings = getSettings();
 $year = intval($settings['year']);
 $sem = intval($settings['sem']);

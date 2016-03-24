@@ -694,15 +694,17 @@ $(function() {
 	});
 	
 	$('.sched-delete-menu').on('click', function() {
-		var fd = {'delete': currentSched};
-		$.post(phpActivity, fd, function(data) {
-			if (data.indexOf('Record deleted!') > -1) {
-				alertWrapper('Schedule deleted!');
-				var newfd = {actid: currentAct, type: actType};
-				populateSchedTable(newfd, $('#schedule-form'));				
-			} else {
-				alertWrapper(data);
-			}
+		delWrapper(function() {
+			var fd = {'delete': currentSched};
+			$.post(phpActivity, fd, function(data) {
+				if (data.indexOf('Record deleted!') > -1) {
+					alertWrapper('Schedule deleted!');
+					var newfd = {actid: currentAct, type: actType};
+					populateSchedTable(newfd, $('#schedule-form'));				
+				} else {
+					alertWrapper(data);
+				}
+			});			
 		});
 	});
 	

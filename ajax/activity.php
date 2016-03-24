@@ -1,7 +1,7 @@
 <?php
 chdir('..');
 date_default_timezone_set('Asia/Manila');
-require_once 'includes/functions.php';
+require_once 'includes/functions.php'; //constants already included
 
 init_session() or die('Error: Session has expired. Please log in again.');
 init_my_cookie();
@@ -10,7 +10,7 @@ extend_timeout();
 
 //print_r($_POST);
 
-$db = new DBObject('cdc');
+$db = new DBObject(CURRENT_DB);
 $sql = '1';
 //die('sample');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -5,7 +5,7 @@ require_once 'includes/classDB.php';
 require_once 'includes/functions.php';
 
 if (!empty($_POST['username']) && !empty($_POST['userpass'])) {
-	$db = new DBObject('cdc');
+	$db = new DBObject(CURRENT_DB);
 	$username = $db->escape($_POST['username']);
 	$hashpass = hash('md5', $_POST['userpass']);
 	

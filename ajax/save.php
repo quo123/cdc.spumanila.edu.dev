@@ -12,7 +12,7 @@ print_r($_POST);
 //die('sample');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
-	$db = new DBObject('cdc');
+	$db = new DBObject(CURRENT_DB);
 	$set = array();
 	$id = '';
 	$col = '';
